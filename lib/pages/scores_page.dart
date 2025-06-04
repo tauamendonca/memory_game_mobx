@@ -1,6 +1,9 @@
+import 'package:dragon_memory/repositories/score_repository.dart';
 import 'package:dragon_memory/theme/theme.dart';
 import 'package:dragon_memory/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 class ScoresPage extends StatefulWidget {
   final Mode mode;
@@ -12,45 +15,67 @@ class ScoresPage extends StatefulWidget {
 }
 
 class _ScoresPageState extends State<ScoresPage> {
-  final List<String> recs = ['Mode', 'Level 8', 'Level 10', 'Level 12'];
-
   String getMode() {
     return widget.mode == Mode.normal ? 'Normal' : 'Hard';
   }
 
+  List<Widget> getScoreList(Map scores) {
+    final List<Widget> widgets = [];
+
+    scores.forEach((level, score) {
+      widgets.add(
+        ListTile(
+          title: Text('Level: $level'),
+          trailing: Text(score.toString()),
+          tileColor: Colors.grey[900],
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
+        ),
+      );
+
+      widgets.add(const Divider(color: Colors.transparent));
+    });
+
+    if (widgets.isEmpty) {
+      widgets.add(Center(child: Text('No scores were recorded yet')));
+    }
+
+    return widgets;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final repository = Provider.of<ScoreRepository>(context);
+
     return Scaffold(
-      appBar: AppBar(title: Center(child: const Text('High Scores'))),
+      appBar: AppBar(centerTitle: true, title: const Text('High Scores')),
 
       body: Padding(
         padding: const EdgeInsets.all(12),
-        child: ListView.separated(
-          itemBuilder: (BuildContext context, int index) {
-            return index == 0
-                ? Padding(
-                    padding: const EdgeInsets.only(top: 36, bottom: 24),
-                    child: Center(
-                      child: Text(
-                        'Mode: ${getMode()}',
-                        style: const TextStyle(
-                          fontSize: 28,
-                          color: DragonTheme.color,
-                        ),
-                      ),
+        child: Observer(
+          builder: (context) => Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 36, bottom: 24),
+                child: Center(
+                  child: Text(
+                    '${getMode()} Mode',
+                    style: const TextStyle(
+                      fontSize: 28,
+                      color: DragonTheme.color,
                     ),
-                  )
-                : ListTile(
-                    title: Text(recs[index]),
-                    trailing: const Text('X moves'),
-                    tileColor: Colors.grey[900],
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                    ),
-                  );
-          },
-          separatorBuilder: (_, _) => const Divider(color: Colors.transparent),
-          itemCount: recs.length,
+                  ),
+                ),
+              ),
+              ...getScoreList(
+                widget.mode == Mode.normal
+                    ? repository.scoresNormal
+                    : repository.scoresHard,
+              ),
+            ],
+          ),
         ),
       ),
     );

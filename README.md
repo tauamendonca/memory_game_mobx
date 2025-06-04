@@ -1,16 +1,24 @@
-# memory
+# DRAGON MEMORY
+## A Dragon Quest memory game
+A memory card game using Provider, MobX and storage with Hive. The theme is Dragon Quest (or Dragon Warrior depending where are you from) and it was based on a youtube showcase from professor Diego Antunes
 
-A new Flutter project.
+Link for the course/showcase: https://www.youtube.com/watch?v=hU8ht030JUM&list=PL_wKlpKIC9vVOZxwQyNzuD1lL9cJgPiiE
 
-## Getting Started
+Some changes, besides the theme, where made - mostly involving the use of a package to limit window resizing in Windows - I am using this project to test changes in Windows' windows according to content size.
+Changes where needed in very few points, thanks to the fact that in the last two or three years (now being June, 2025)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+Known bugs after following the tutorial: 
+- still has to refresh cache when it starts a new level after clearing or losing one
+- sometimes if you click very fast you can click one card before starting a new level, and that leaves the first move in a new level opening only one card. Perhaps when clearing the cache this will be solved too.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Improvement topics:
+- overall UI and layout
+- card sizing specially
+- cache
+- web version
+- change theme to avoid Nintendo's lawyers (!) 
+- publishing
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Changelog
+June, 03rd, 2025 - V 1.0 - Game working fully and saving high scores, windows limiting size so it won't overflow in Windows.    

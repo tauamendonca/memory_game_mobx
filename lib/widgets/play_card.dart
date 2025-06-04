@@ -84,7 +84,9 @@ class _PlayCardState extends State<PlayCard>
   }
 
   void resetCard() {
-    animation.reverse();
+    if (mounted) {
+      animation.reverse();
+    }
   }
 
   AssetImage getImage(double angle) {

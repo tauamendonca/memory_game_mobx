@@ -20,7 +20,7 @@ class LevelSelectPage extends StatelessWidget {
         .toList();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Level Select')),
+      appBar: AppBar(centerTitle: true, title: const Text('Level Select')),
       body: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 400),

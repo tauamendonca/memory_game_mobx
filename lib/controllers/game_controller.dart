@@ -1,5 +1,6 @@
 import 'package:dragon_memory/models/game_card_select.dart';
 import 'package:dragon_memory/models/game_play.dart';
+import 'package:dragon_memory/repositories/score_repository.dart';
 import 'package:dragon_memory/settings/game_settings.dart';
 import 'package:dragon_memory/utils/constants.dart';
 import 'package:mobx/mobx.dart';
@@ -27,9 +28,16 @@ abstract class GameControllerBase with Store {
   int _hits = 0;
   int _numMatches = 0;
   int remainingMatches = 0;
+  ScoreRepository scoreRepository;
 
   @computed
   bool get fullPlay => (_choice.length == 2);
+
+  GameControllerBase({required this.scoreRepository}) {
+    reaction((_) => win == true, (bool won) {
+      scoreRepository.updateScores(gamePlay: _gamePlay, score: score);
+    });
+  }
 
   void startGame({required GamePlay gamePlay}) {
     _gamePlay = gamePlay;
@@ -69,9 +77,9 @@ abstract class GameControllerBase with Store {
   Future<void> _matchChoices() async {
     if (fullPlay) {
       if (_choice[0].option == _choice[1].option) {
-        _hits++;
         _choice[0].matched = true;
         _choice[1].matched = true;
+        _hits++;
       } else {
         await Future.delayed(const Duration(seconds: 1), () {
           for (var i in [0, 1]) {
@@ -81,9 +89,9 @@ abstract class GameControllerBase with Store {
         });
       }
 
-      _resetChoices();
       _updateScore();
       _checkGameResult();
+      _resetChoices();
     }
   }
 
@@ -127,11 +135,11 @@ abstract class GameControllerBase with Store {
     return score < _numMatches - _hits;
   }
 
-  restartGame() {
+  void restartGame() {
     startGame(gamePlay: _gamePlay);
   }
 
-  nextLevel() {
+  void nextLevel() {
     int levelIndex = 0;
 
     if (_gamePlay.level != GameSettings.levels.last) {

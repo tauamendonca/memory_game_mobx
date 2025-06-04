@@ -16,7 +16,7 @@ class Logo extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 40),
           child: RichText(
             text: TextSpan(
-              text: 'Dragon Quest ',
+              text: 'Dragon ',
               style: DefaultTextStyle.of(context).style.copyWith(fontSize: 30),
               children: [
                 TextSpan(
