@@ -4,6 +4,8 @@ A memory card game using Provider, MobX and storage with Hive. The theme is Drag
 
 Link for the course/showcase: https://www.youtube.com/watch?v=hU8ht030JUM&list=PL_wKlpKIC9vVOZxwQyNzuD1lL9cJgPiiE
 
+[![Prof Diego Antunes - Jogo da Memória em Flutter](assets\other\readme.png)](https://www.youtube.com/watch?v=hU8ht030JUM&list=PL_wKlpKIC9vVOZxwQyNzuD1lL9cJgPiiE)
+
 Some changes, besides the theme, where made - mostly involving the use of a package to limit window resizing in Windows - I am using this project to test changes in Windows' windows according to content size.
 Changes where needed in very few points, thanks to the fact that in the last two or three years (now being June, 2025)
 
