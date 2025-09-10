@@ -14,21 +14,19 @@ Link for the course/showcase: https://www.youtube.com/watch?v=hU8ht030JUM&list=P
 ](https://www.youtube.com/watch?v=hU8ht030JUM&list=PL_wKlpKIC9vVOZxwQyNzuD1lL9cJgPiiE)
 
 
-Some changes, besides the theme, where made - mostly involving the use of a package to limit window resizing in Windows - I am using this project to test changes in Windows' windows according to content size.
-Changes where needed in very few points, thanks to the fact that in the last two or three years (now being June, 2025)
-
+Some changes, besides the theme, where made - one of them involving the use of a package to limit window resizing in Windows - I am using this project to test changes in Windows' windows according to content size.
 
 Known bugs after following the tutorial: 
 - still has to refresh cache when it starts a new level after clearing or losing one
 - sometimes if you click very fast you can click one card before starting a new level, and that leaves the first move in a new level opening only one card. Perhaps when clearing the cache this will be solved too.
 
-Improvement topics:
+Improvement topics (no schedule for them, yet):
 - overall UI and layout
 - card sizing specially
 - cache
 - web version
-- change theme to avoid Nintendo's lawyers (!) 
-- publishing
+- change theme
+- publish it
 
 # Changelog
 June, 03rd, 2025 - V 1.0 - Game working fully and saving high scores, windows limiting size so it won't overflow in Windows.    
